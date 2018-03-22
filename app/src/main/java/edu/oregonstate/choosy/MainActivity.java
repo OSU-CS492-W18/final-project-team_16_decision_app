@@ -53,18 +53,14 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
         //Try to add data to database --Remove this later--
         ChoosyDatabase db = new ChoosyDatabase(this);
-        DecisionUtils.decisionObject test1 = new DecisionUtils.decisionObject();
-        DecisionUtils.decisionObject test2 = new DecisionUtils.decisionObject();
-        DecisionUtils.decisionObject test3 = new DecisionUtils.decisionObject();
-        test1.firstOption = "Cake";
-        test1.secondOption = "Pie";
-        test2.firstOption = "Pizza";
-        test2.secondOption = "Hotdogs";
-        test3.firstOption = "Hiking";
-        test3.secondOption = "Skiing";
+        DecisionUtils.decisionObject test1 = new DecisionUtils.decisionObject("Cake", "Pie");
+        DecisionUtils.decisionObject test2 = new DecisionUtils.decisionObject("Pizza", "Hotdogs");
+        DecisionUtils.decisionObject test3 = new DecisionUtils.decisionObject("Hiking", "Skiing");
+
         db.addDecision(test1);
         db.addDecision(test2);
         db.addDecision(test3);
+
         //Try to get added data from database
         ArrayList<String> testVals = new ArrayList<>();
         ArrayList<DecisionUtils.decisionObject> testDec = db.getDecisions();
@@ -75,6 +71,15 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
         }
         Log.d("Main","----Decision 1: "+testDec.get(0).getString() + " --Decision 2: "+testDec.get(1).getString());
         mSavedDecisionsAdapter.updateSavedDecisionsData(testVals);
+
+        //Try to add factor to factor database
+        DecisionUtils.factorObject factor1 = new DecisionUtils.factorObject("Tastiness","Cake", 1, 50);
+        DecisionUtils.factorObject factor2 = new DecisionUtils.factorObject("Tastiness", "Pizza", 1, 50);
+        DecisionUtils.factorObject factor3 = new DecisionUtils.factorObject("Texture", "Cake", 1, 50);
+
+        db.addFactor(factor1);
+        db.addFactor(factor2);
+        db.addFactor(factor3);
     }
 
 

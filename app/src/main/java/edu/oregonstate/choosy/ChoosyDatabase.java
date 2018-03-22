@@ -37,6 +37,7 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
                 "CREATE TABLE " + ChoosyContract.Factors.TABLE_NAME +
                         " (" + ChoosyContract.Factors._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         ChoosyContract.Factors.COLUMN_NAME + " TEXT NOT NULL, " +
+                        ChoosyContract.Factors.COLUMN_COMP + " TEXT NOT NULL, " +
                         ChoosyContract.Factors.COLUMN_PRO + " TEXT NOT NULL, " +
                         ChoosyContract.Factors.COLUMN_WEIGHT + " INTEGER NOT NULL, " +
                         ChoosyContract.Factors.COLUMN_TIMESTAMP +
@@ -55,8 +56,6 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
 
     public void addDecision(DecisionUtils.decisionObject dec) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        //If we use decision objects, pull out the strings
 
         //Insert
         String sqlSelection = ChoosyContract.Comparisons.COLUMN_FIRST + " = ?";
@@ -82,6 +81,35 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             Log.d("ChoosyDatabase","Decision already exists in database!");
     }
 
+    public void addFactor(DecisionUtils.factorObject factor) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //Insert
+        String sqlSelection = ChoosyContract.Factors.COLUMN_NAME + " = ? AND " + ChoosyContract.Factors.COLUMN_COMP + " = ?";
+        String[] sqlSelectionArgs = { factor.name, factor.comp };
+        Cursor cursor = db.query(
+                ChoosyContract.Factors.TABLE_NAME,
+                null,
+                sqlSelection,
+                sqlSelectionArgs,
+                null,
+                null,
+                null
+        );
+        if (cursor.getCount() == 0) {
+            //if factor entry doesn't already exist, add entry
+            ContentValues values = new ContentValues();
+            values.put(ChoosyContract.Factors.COLUMN_NAME, factor.name);
+            values.put(ChoosyContract.Factors.COLUMN_COMP, factor.comp);
+            values.put(ChoosyContract.Factors.COLUMN_PRO, factor.pro);
+            values.put(ChoosyContract.Factors.COLUMN_WEIGHT, factor.weight);
+            db.insert(ChoosyContract.Factors.TABLE_NAME, null, values);
+            Log.d("ChoosyDatabase","Added factor "+ factor.name +" of decision "+ factor.comp +" to database.");
+        }
+        else
+            Log.d("ChoosyDatabase","Factor already exists for decision "+ factor.comp + " in database!");
+    }
+
     public ArrayList<DecisionUtils.decisionObject> getDecisions() {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -90,15 +118,19 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
                 null, ChoosyContract.Comparisons.COLUMN_TIMESTAMP + " DESC");
 
         ArrayList<DecisionUtils.decisionObject> vals = new ArrayList<>();
-        DecisionUtils.decisionObject val = new DecisionUtils.decisionObject();
+        DecisionUtils.decisionObject val;
         int index;
         while (cursor.moveToNext()) {
-            val = new DecisionUtils.decisionObject();
+            String first = "";
+            String second = "";
+
             index = cursor.getColumnIndex(ChoosyContract.Comparisons.COLUMN_FIRST);
-            val.firstOption = cursor.getString(index);
+            first = cursor.getString(index);
 
             index = cursor.getColumnIndex(ChoosyContract.Comparisons.COLUMN_SECOND);
-            val.secondOption = cursor.getString(index);
+            second = cursor.getString(index);
+
+            val = new DecisionUtils.decisionObject(first, second);
             vals.add(val);
 
             Log.d("ChoosyDatabase","Retrieved "+val.firstOption+" vs "+val.secondOption+" from database.");

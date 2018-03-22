@@ -29,7 +29,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-
+        </activity>
+        <activity
+            android:name=".FinalDecisionActivity"
+            android:parentActivityName=".DecisionDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DecisionDetailActivity"/>
         </activity>
     </application>
 

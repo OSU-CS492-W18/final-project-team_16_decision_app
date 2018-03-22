@@ -8,19 +8,6 @@
     tools:context="edu.oregonstate.choosy.MainActivity"
     android:background="@color/colorPrimaryDark">
 
-    <EditText
-        android:id="@+id/et_temp_add_saved_decision"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:hint="Enter a Decision Title to Save"/>
-
-    <Button
-        android:id="@+id/btn_temp_add_saved_decision"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Saved Decision"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_main_saved_decisions"
         android:layout_width="match_parent"

@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
             "bikes > quads"
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +50,31 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.button_add_new_decision:
+                openNewDecisionActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void openNewDecisionActivity(){
+        Log.d(TAG, "The plus button was clicked !!!");
+        Intent addNewDecisionIntent = new Intent(this, AddNewDecisionActivity.class);
+        startActivity(addNewDecisionIntent);
+    }
+
     @Override
     public void onSavedDecisionClick(String itemText) {
-        Log.d(TAG, "WOOHOO !!!!! THE ITEM IS CLICKABLE!!!! !!!! !!!");
         Intent detailedDecisionIntent = new Intent(this, DecisionDetailActivity.class);
         detailedDecisionIntent.putExtra("temporary", itemText);
         startActivity(detailedDecisionIntent);

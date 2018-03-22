@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Choosy</string>
+    <string name="action_add_new_decision">Add new decision</string>
+
+    <string name="new_option_1_hint">First option</string>
+    <string name="new_option_2_hint">Second option</string>
 </resources>

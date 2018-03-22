@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 
 
-public class MainActivity extends AppCompatActivity implements SavedDecisionAdapter.OnSavedDecisionClickListener{
+public class MainActivity extends AppCompatActivity implements SavedDecisionAdapter.OnSavedDecisionClickListener {
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
     @Override
     public void onSavedDecisionClick(String itemText) {
-//        Log.d(TAG, "WOOHOO !!!!! THE ITEM IS CLICKABLE!!!! !!!! !!!");
+        Log.d(TAG, "WOOHOO !!!!! THE ITEM IS CLICKABLE!!!! !!!! !!!");
         Intent detailedDecisionIntent = new Intent(this, DecisionDetailActivity.class);
-//        detailedDecisionIntent.putExtra("temporary", itemText);
+        detailedDecisionIntent.putExtra("temporary", itemText);
         startActivity(detailedDecisionIntent);
     }
 }

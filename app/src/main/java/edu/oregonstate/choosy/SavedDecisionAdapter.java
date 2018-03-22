@@ -18,7 +18,7 @@ import static android.content.ContentValues.TAG;
 public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdapter.SavedDecisionViewHolder> {
 
     private ArrayList<String> mSavedDecisionsList;
-    OnSavedDecisionClickListener mSavedDecisionClickListener;
+    private OnSavedDecisionClickListener mSavedDecisionClickListener;
 
     SavedDecisionAdapter(OnSavedDecisionClickListener savedDecisionClickListener){
         mSavedDecisionsList = new ArrayList<String>();
@@ -53,20 +53,25 @@ public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdap
         return mSavedDecisionsList.size();
     }
 
-    class SavedDecisionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class SavedDecisionViewHolder extends RecyclerView.ViewHolder {
         private TextView mSavedDecisionTextView;
 
         public SavedDecisionViewHolder(View itemView){
             super(itemView);
             mSavedDecisionTextView = (TextView)itemView.findViewById(R.id.tv_main_inrv_saved_decision_item_text);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    String temp = "temporary string";
+                    mSavedDecisionClickListener.onSavedDecisionClick(temp);
+                }
+            });
         }
+        
         public void bind(String decision){
             mSavedDecisionTextView.setText(decision);
         }
 
-        public void onClick(View view){
-            Log.d(TAG, "onClick has been clicked !!!!!!!!!");
-        }
     }
 
 }

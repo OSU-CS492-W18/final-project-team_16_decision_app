@@ -11,6 +11,11 @@ public class DecisionUtils {
     public static class decisionObject implements Serializable {
         public String firstOption;
         public String secondOption;
+
+        public String getString() {
+            String line = firstOption + " vs " + secondOption;
+            return line;
+        }
     }
 
 }

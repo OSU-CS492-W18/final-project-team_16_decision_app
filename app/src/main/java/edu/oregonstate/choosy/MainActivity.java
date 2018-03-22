@@ -80,6 +80,12 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
         db.addFactor(factor1);
         db.addFactor(factor2);
         db.addFactor(factor3);
+
+        //Try to get factors
+        ArrayList<DecisionUtils.factorObject> factors = db.getFactors("Cake");
+        for(DecisionUtils.factorObject fact : factors) {
+            Log.d("Main","Factor name: "+fact.name+" Linked decision: "+fact.comp+" Pro: "+fact.pro+" Weight: "+fact.weight);
+        }
     }
 
 

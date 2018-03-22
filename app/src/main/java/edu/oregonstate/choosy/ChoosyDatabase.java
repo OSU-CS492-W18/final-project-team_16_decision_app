@@ -138,4 +138,44 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
 
         return vals;
     }
+
+    public ArrayList<DecisionUtils.factorObject> getFactors(String decision) {
+        //Get all factors for specified comparison name / decision
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sqlSelection = ChoosyContract.Factors.COLUMN_COMP + " = ?";
+        String[] sqlSelectionArgs = { decision };
+
+        Cursor cursor = db.query(ChoosyContract.Factors.TABLE_NAME,
+                null, sqlSelection, sqlSelectionArgs, null,
+                null, ChoosyContract.Factors.COLUMN_TIMESTAMP + " DESC");
+
+        ArrayList<DecisionUtils.factorObject> vals = new ArrayList<>();
+        DecisionUtils.factorObject val;
+        int index;
+        while (cursor.moveToNext()) {
+            String name = "";
+            String comp = "";
+            int pro = -1;
+            int weight = -1;
+
+            index = cursor.getColumnIndex(ChoosyContract.Factors.COLUMN_NAME);
+            name = cursor.getString(index);
+
+            index = cursor.getColumnIndex(ChoosyContract.Factors.COLUMN_COMP);
+            comp = cursor.getString(index);
+
+            index = cursor.getColumnIndex(ChoosyContract.Factors.COLUMN_PRO);
+            pro = cursor.getInt(index);
+
+            index = cursor.getColumnIndex(ChoosyContract.Factors.COLUMN_WEIGHT);
+            weight = cursor.getInt(index);
+
+            val = new DecisionUtils.factorObject(name, comp, pro, weight);
+            vals.add(val);
+
+            Log.d("ChoosyDatabase","Retrieved "+val.name+" factor of decision "+val.comp+" from database.");
+        }
+
+        return vals;
+    }
 }

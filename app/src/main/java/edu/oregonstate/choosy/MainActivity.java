@@ -11,7 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity implements SavedDecisionAdapter.OnSavedDecisionClickListener {
@@ -22,6 +23,15 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
     private EditText mSavedDecisionsEntryET;
 
     private SavedDecisionAdapter mSavedDecisionsAdapter;
+
+
+    private static final String[] tempSavedDecisionsData = {
+            "Cars > Trucks",
+            "Pie > Cake",
+            "Camaro > Mustang",
+            "bikes > quads"
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +45,8 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
         mSavedDecisionsAdapter = new SavedDecisionAdapter(this);
         mSavedDecisionsRV.setAdapter(mSavedDecisionsAdapter);
+        mSavedDecisionsAdapter.updateSavedDecisionsData(new ArrayList<String>(Arrays.asList(tempSavedDecisionsData)));
 
-        mSavedDecisionsEntryET = (EditText)findViewById(R.id.et_temp_add_saved_decision);
-
-        Button addSavedDecisionBtn = (Button)findViewById(R.id.btn_temp_add_saved_decision);
-        addSavedDecisionBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String savedDecisionText = mSavedDecisionsEntryET.getText().toString();
-                if(!TextUtils.isEmpty(savedDecisionText)){
-                    mSavedDecisionsAdapter.addSavedDecision(savedDecisionText);
-                    mSavedDecisionsEntryET.setText("");
-                }
-            }
-        });
     }
 
     @Override

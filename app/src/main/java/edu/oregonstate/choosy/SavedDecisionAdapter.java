@@ -25,6 +25,11 @@ public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdap
         mSavedDecisionClickListener = savedDecisionClickListener;
     }
 
+    public void updateSavedDecisionsData(ArrayList<String> decisionData){
+        mSavedDecisionsList = decisionData;
+        notifyDataSetChanged();
+    }
+
     @Override
     public SavedDecisionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -39,13 +44,7 @@ public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdap
 
     @Override
     public void onBindViewHolder(SavedDecisionViewHolder holder, int position) {
-        String decision = mSavedDecisionsList.get(mSavedDecisionsList.size() - position - 1);
-        holder.bind(decision);
-    }
-
-    public void addSavedDecision(String decisionItem){
-        mSavedDecisionsList.add(decisionItem);
-        notifyDataSetChanged();
+        holder.bind(mSavedDecisionsList.get(position));
     }
 
     @Override
@@ -62,12 +61,12 @@ public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdap
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    String temp = "temporary string";
-                    mSavedDecisionClickListener.onSavedDecisionClick(temp);
+                    String decisionText = mSavedDecisionsList.get(getAdapterPosition());
+                    mSavedDecisionClickListener.onSavedDecisionClick(decisionText);
                 }
             });
         }
-        
+
         public void bind(String decision){
             mSavedDecisionTextView.setText(decision);
         }

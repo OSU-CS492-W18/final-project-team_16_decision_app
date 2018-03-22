@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.oregonstate.choosy.FinalDecisionActivity"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/TV_final_intro_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/final_intro_1"/>
+
+    <TextView
+        android:id="@+id/TV_final_intro_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cake vs. Pie"/>
+
+    <TextView
+        android:id="@+id/TV_final_intro_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/final_intro_3"/>
+
+    <TextView
+        android:id="@+id/TV_final_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pie!"/>
+
+    <TextView
+        android:id="@+id/TV_final_percentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="58%"/>
+
+    <TextView
+        android:id="@+id/TV_losing_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="cake"/>
+
+    <TextView
+        android:id="@+id/TV_losing_percentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="42%"/>
+
+</LinearLayout>

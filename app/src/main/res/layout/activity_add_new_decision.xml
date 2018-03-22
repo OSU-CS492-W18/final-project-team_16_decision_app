@@ -20,4 +20,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/new_option_2_hint"/>
 
+    <TextView
+        android:id="@+id/TV_quote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This temporary text shows where the inspirational quote will go."/>
+
 </LinearLayout>

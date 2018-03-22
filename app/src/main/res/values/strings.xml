@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Choosy</string>
+    <string name="action_add_new_decision">Add new decision</string>
 </resources>

@@ -19,6 +19,7 @@ public class ChoosyContract {
     public static class Factors implements BaseColumns {
         public static final String TABLE_NAME = "factors";
         public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_PRO = "pro";
         public static final String COLUMN_WEIGHT = "weight";
         public static final String COLUMN_TIMESTAMP = "timestamp";
     }

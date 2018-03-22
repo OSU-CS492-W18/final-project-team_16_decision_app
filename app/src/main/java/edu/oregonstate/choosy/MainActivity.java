@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
     public void openNewDecisionActivity(){
         Log.d(TAG, "The plus button was clicked !!!");
+        Intent addNewDecisionIntent = new Intent(this, AddNewDecisionActivity.class);
+        startActivity(addNewDecisionIntent);
     }
 
     @Override

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.oregonstate.choosy.AddNewDecisionActivity"
+    android:background="@color/colorPrimaryDark">
+
+    <EditText
+        android:id="@+id/ET_new_option_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_option_1_hint"/>
+
+    <EditText
+        android:id="@+id/ET_new_option_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_option_2_hint"/>
+
+</LinearLayout>

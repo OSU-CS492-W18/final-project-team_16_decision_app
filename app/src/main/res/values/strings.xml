@@ -5,11 +5,17 @@
     <!-- Add new decision activity -->
     <string name="new_option_1_hint">First option</string>
     <string name="new_option_2_hint">Second option</string>
-    <string name="see_result_btn_title">See your decision result</string>
+
 
     <!-- Final results activity -->
     <string name="final_intro_1">Based on your preferences for</string>
     <string name="final_intro_3">you should choose ...</string>
 
+    <!-- Detail Decision Activity -->
+    <string-array name="pro_con_spinner_items">
+        <item>Pro</item>
+        <item>Con</item>
+    </string-array>
+    <string name="see_result_btn_title">See your decision result</string>
 
 </resources>

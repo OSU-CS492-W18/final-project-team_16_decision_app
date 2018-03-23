@@ -20,6 +20,12 @@
         android:layout_height="wrap_content"
         android:hint="@string/new_option_2_hint"/>
 
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Decision"/>
+
     <TextView
         android:id="@+id/TV_quote"
         android:layout_width="match_parent"

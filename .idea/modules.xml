@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Choosy.iml" filepath="$PROJECT_DIR$/Choosy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/final-project-team_16_decision_app.iml" filepath="$PROJECT_DIR$/.idea/final-project-team_16_decision_app.iml" />
     </modules>

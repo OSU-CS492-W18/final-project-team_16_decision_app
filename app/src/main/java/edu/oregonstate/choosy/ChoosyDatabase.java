@@ -184,4 +184,22 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
 
         return vals;
     }
+
+    public void deleteDecision(String dec) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Delete decision
+        String where = ChoosyContract.Comparisons.COLUMN_FIRST + " = ?";
+        String[] SQLwhereArgs = { dec };
+        db.delete(ChoosyContract.Comparisons.TABLE_NAME, where, SQLwhereArgs);
+        //Delete factors
+        where = ChoosyContract.Factors.COLUMN_COMP + " = ?";
+        db.delete(ChoosyContract.Factors.TABLE_NAME, where, SQLwhereArgs);
+    }
+
+    public void deleteFactor(String name, String decName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String where = ChoosyContract.Factors.COLUMN_COMP + " = ? AND " + ChoosyContract.Factors.COLUMN_NAME + " = ?";
+        String[] SQLwhereArgs = { name, decName };
+        db.delete(ChoosyContract.Factors.TABLE_NAME, where, SQLwhereArgs);
+    }
 }

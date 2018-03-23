@@ -12,12 +12,18 @@
         android:id="@+id/ET_new_option_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_customizations"
+        android:layout_margin="12dp"
+        android:textColor="#ffffff"
         android:hint="@string/new_option_1_hint"/>
 
     <EditText
         android:id="@+id/ET_new_option_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_customizations"
+        android:layout_margin="12dp"
+        android:textColor="#ffffff"
         android:hint="@string/new_option_2_hint"/>
 
     <Button

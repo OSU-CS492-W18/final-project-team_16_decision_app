@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="edu.oregonstate.choosy.DecisionDetailActivity"
-    android:background="#EA7A7A">
+    android:background="@color/colorPrimaryDark">
 
 
     <LinearLayout

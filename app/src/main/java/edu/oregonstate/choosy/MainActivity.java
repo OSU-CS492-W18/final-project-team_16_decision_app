@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
         mSavedDecisionsAdapter.updateSavedDecisionsData(testDec);
 
         //Try to add factor to factor database
-        DecisionUtils.factorObject factor1 = new DecisionUtils.factorObject("Tastiness","Cake", 1, 50);
-        DecisionUtils.factorObject factor2 = new DecisionUtils.factorObject("Tastiness", "Pizza", 1, 50);
-        DecisionUtils.factorObject factor3 = new DecisionUtils.factorObject("Texture", "Cake", 1, 50);
+        DecisionUtils.factorObject factor1 = new DecisionUtils.factorObject("Tastiness","Cake", 1, 37);
+        DecisionUtils.factorObject factor2 = new DecisionUtils.factorObject("Tastiness", "Pizza", 1, 70);
+        DecisionUtils.factorObject factor3 = new DecisionUtils.factorObject("Texture", "Cake", 1, 46);
 
         db.addFactor(factor1);
         db.addFactor(factor2);

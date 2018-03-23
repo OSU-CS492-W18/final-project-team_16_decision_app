@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class FinalDecisionActivity extends AppCompatActivity {
 
     private DecisionUtils.decisionObject mDecisionData;
+    private DecisionUtils.winnerData mWinnerData;
     private TextView mDecisionTitle;
     private TextView mWinningResult;
     private TextView mWinningPercentage;
@@ -30,33 +33,15 @@ public class FinalDecisionActivity extends AppCompatActivity {
         mDecisionData = (DecisionUtils.decisionObject)intent.getSerializableExtra(DecisionUtils.decisionObject.EXTRA_DECISION_OBJECT);
         mDecisionTitle.setText( mDecisionData.getString() );
 
-        //Determine winning result
-        //get winner from intent
-        boolean firstWon = true;
-        int winningPercent = -1;
-        int losingPercent = -1;
-        String winningResult = "Nothing";
-        String losingResult = "Nothing";
+        mWinnerData = (DecisionUtils.winnerData)intent.getSerializableExtra(DecisionUtils.winnerData.EXTRA_WINNER_OBJECT);
 
-        if(firstWon) {
-            //Fake values. Replace these with intent data.
-            winningPercent = 50;
-            losingPercent = 50;
-            winningResult = mDecisionData.firstOption;
-            losingResult = mDecisionData.secondOption;
+        if(mWinnerData != null) { //Prevent crash if no factors.
+            //Update text
+            mWinningResult.setText(mWinnerData.winner + "!");
+            mLosingResult.setText(mWinnerData.loser + "...");
+            mWinningPercentage.setText( mWinnerData.percent + "%");
+            mLosingPercentage.setText( mWinnerData.percentLoser + "%");
         }
-        else {
-            winningPercent = 50;
-            losingPercent = 50;
-            winningResult = mDecisionData.secondOption;
-            losingResult = mDecisionData.firstOption;
-        }
-
-        //Update text
-        mWinningResult.setText(winningResult + "!");
-        mLosingResult.setText(losingResult + "...");
-        mWinningPercentage.setText( Integer.toString(winningPercent));
-        mLosingPercentage.setText( Integer.toString(losingPercent));
 
     }
 }

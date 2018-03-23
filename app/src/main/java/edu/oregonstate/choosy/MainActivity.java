@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
     @Override
     public void onSavedDecisionClick(DecisionUtils.decisionObject decision) {
         Intent detailedDecisionIntent = new Intent(this, DecisionDetailActivity.class);
-        detailedDecisionIntent.putExtra("temporary", decision);
+        detailedDecisionIntent.putExtra(DecisionUtils.decisionObject.EXTRA_DECISION_OBJECT, decision);
         startActivity(detailedDecisionIntent);
     }
 }

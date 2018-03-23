@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class AddNewDecisionActivity extends AppCompatActivity {
 
@@ -19,6 +21,7 @@ public class AddNewDecisionActivity extends AppCompatActivity {
     private EditText mOption2;
     private Button mSubmit;
     private TextView quoteView;
+    private ProgressBar mLoadingProgressBar;
     private final static String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -31,6 +34,7 @@ public class AddNewDecisionActivity extends AppCompatActivity {
         mSubmit = (Button)findViewById(R.id.button_submit);
 
         quoteView = (TextView)findViewById(R.id.TV_quote);
+        mLoadingProgressBar = (ProgressBar)findViewById(R.id.PB_load);
         getQuote();
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +63,24 @@ public class AddNewDecisionActivity extends AppCompatActivity {
     }
 
     private void getQuote() {
-        String quoteURL = QuoteUtils.buildQuoteURL("inspire");
+        Random r =  new Random();
+        int rand = r.nextInt(4);
+        String quotetype = "";
+        if (rand == 3) {
+            quotetype = "management";
+        }
+        if (rand == 2) {
+            quotetype = "life";
+        }
+        if (rand == 1) {
+            quotetype = "students";
+        }
+        if (rand == 0) {
+            quotetype = "inspire";
+        }
+        Log.d(TAG, "quote type: " + quotetype);
+        String quoteURL = QuoteUtils.buildQuoteURL(quotetype);
+        Log.d(TAG, "url generated: " + quoteURL);
         new QuoteFetchTask().execute(quoteURL);
     }
 
@@ -67,6 +88,7 @@ public class AddNewDecisionActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            mLoadingProgressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -88,6 +110,7 @@ public class AddNewDecisionActivity extends AppCompatActivity {
                 Log.d(TAG, "quote fetched: " + quote);
                 quoteView.setText(quote);
             }
+            mLoadingProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 }

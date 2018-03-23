@@ -76,6 +76,13 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int req, int res, Intent intent) {
+        ChoosyDatabase db = new ChoosyDatabase(this);
+        ArrayList<DecisionUtils.decisionObject> testDec = db.getDecisions();
+        mSavedDecisionsAdapter.updateSavedDecisionsData(testDec);
+    }
+
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.button_add_new_decision:
@@ -88,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
     public void openNewDecisionActivity(){
         Intent addNewDecisionIntent = new Intent(this, AddNewDecisionActivity.class);
-        startActivity(addNewDecisionIntent);
+        startActivityForResult(addNewDecisionIntent, 1);
     }
 
     @Override

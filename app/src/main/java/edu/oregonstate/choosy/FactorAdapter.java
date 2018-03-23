@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class FactorAdapter extends RecyclerView.Adapter<FactorAdapter.FactorViewHolder> {
 
-    private ArrayList<String> mFactorList;
+    private ArrayList<DecisionUtils.factorObject> mFactorList;
 
 
     FactorAdapter(){
-        mFactorList = new ArrayList<String>();
+        mFactorList = new ArrayList<DecisionUtils.factorObject>();
     }
 
-    public void updateFactorData(ArrayList<String> factorData){
+    public void updateFactorData(ArrayList<DecisionUtils.factorObject> factorData){
         mFactorList = factorData;
         notifyDataSetChanged();
     }
@@ -51,8 +51,8 @@ public class FactorAdapter extends RecyclerView.Adapter<FactorAdapter.FactorView
             super(itemView);
             mFactorTextView = (TextView)itemView.findViewById(R.id.tv_factor_item_text);
         }
-        public void bind(String factor){
-            mFactorTextView.setText(factor);
+        public void bind(DecisionUtils.factorObject factor){
+            mFactorTextView.setText(factor.name);
         }
     }
 }

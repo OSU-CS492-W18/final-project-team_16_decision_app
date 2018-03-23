@@ -33,6 +33,7 @@ public class DecisionDetailActivity extends AppCompatActivity {
 
     private RecyclerView mFactorRV;
     private FactorAdapter mFactorAdapter;
+    private ArrayList<DecisionUtils.factorObject> factors;
 
     private static final String[] tempFactorData = {
             "Tastiness",
@@ -56,10 +57,18 @@ public class DecisionDetailActivity extends AppCompatActivity {
         mFactorRV.setHasFixedSize(true);
         mFactorAdapter = new FactorAdapter();
         mFactorRV.setAdapter(mFactorAdapter);
-        mFactorAdapter.updateFactorData(new ArrayList<String>(Arrays.asList(tempFactorData)));
 
         mFactorTitle = (EditText)findViewById(R.id.ET_factor_title);
         mSeekBar = (SeekBar)findViewById(R.id.simpleSeekBar);
+
+        //Get data from intent
+        Intent decisionData = getIntent();
+        DecisionUtils.decisionObject decision = (DecisionUtils.decisionObject)decisionData.getSerializableExtra(DecisionUtils.decisionObject.EXTRA_DECISION_OBJECT);
+
+        //Get data from database
+        ChoosyDatabase db = new ChoosyDatabase(this);
+        factors = db.getFactors(decision.firstOption);
+        mFactorAdapter.updateFactorData(factors);
 
         mButtonAdd = (Button)findViewById(R.id.add_factor_button);
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +101,9 @@ public class DecisionDetailActivity extends AppCompatActivity {
                     //Reset ui
                     mFactorTitle.setText("");
                     mSeekBar.setProgress(50);
+
+                    factors = db.getFactors(decision.firstOption);
+                    mFactorAdapter.updateFactorData(factors);
                 }
             }
         });

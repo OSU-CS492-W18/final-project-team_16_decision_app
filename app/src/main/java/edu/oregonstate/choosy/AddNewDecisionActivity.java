@@ -1,5 +1,7 @@
 package edu.oregonstate.choosy;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,15 +46,13 @@ public class AddNewDecisionActivity extends AppCompatActivity {
                     DecisionUtils.decisionObject toAdd = new DecisionUtils.decisionObject(first, second);
                     if(db.addDecision(toAdd) ) {
                         //Added successfully
+                        Intent success = new Intent();
+                        setResult(Activity.RESULT_OK, success);
+                        finish();
                     }
                     else {
-                        //Already exists
+                        //Already exists Display toast?
                     }
-                    //Display a toast or notification? Or even navigate back to main activity
-
-                    //Clear edit text fields
-                    mOption1.setText("");
-                    mOption2.setText("");
                 }
             }
         });

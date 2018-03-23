@@ -38,11 +38,17 @@
         <Spinner
             android:id="@+id/pro_con_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/spinner_background"/>
 
         <Button
             android:id="@+id/add_factor_button"
+            android:background="@drawable/choosy_button_alt"
             android:text="add"
+            android:textColor="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

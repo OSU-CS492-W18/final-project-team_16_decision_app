@@ -12,42 +12,70 @@
         android:id="@+id/TV_final_intro_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/final_intro_1"/>
+        android:text="@string/final_intro_1"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/TV_final_intro_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cake vs. Pie"/>
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="5dp"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/TV_final_intro_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
         android:text="@string/final_intro_3"/>
 
     <TextView
         android:id="@+id/TV_final_result"
+        android:background="@drawable/final_result"
+        android:textSize="36sp"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pie!"/>
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/TV_final_percentage"
         android:layout_width="match_parent"
+        android:textSize="18sp"
         android:layout_height="wrap_content"
-        android:text="58%"/>
+        android:textColor="@color/colorHint"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/TV_losing_result"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
+        android:textSize="24sp"
+        android:layout_marginTop="50dp"
         android:layout_height="wrap_content"
-        android:text="cake"/>
+        android:textColor="@color/colorWhite"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/TV_losing_percentage"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="42%"/>
+        android:textColor="@color/colorHint"
+        android:textSize="18sp"
+        android:gravity="center"/>
 
 </LinearLayout>

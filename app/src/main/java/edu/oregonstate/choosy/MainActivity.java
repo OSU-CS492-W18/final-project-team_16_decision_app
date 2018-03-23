@@ -24,8 +24,10 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
     private final static String TAG = MainActivity.class.getSimpleName();
 
     private RecyclerView mSavedDecisionsRV;
+
     private EditText mSavedDecisionsEntryET;
     private SQLiteDatabase mDB;
+
 
     private SavedDecisionAdapter mSavedDecisionsAdapter;
 
@@ -97,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
     }
 
     public void openNewDecisionActivity(){
-        Log.d(TAG, "The plus button was clicked !!!");
         Intent addNewDecisionIntent = new Intent(this, AddNewDecisionActivity.class);
         startActivity(addNewDecisionIntent);
     }

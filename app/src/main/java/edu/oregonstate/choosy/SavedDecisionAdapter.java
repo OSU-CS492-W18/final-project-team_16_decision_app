@@ -1,15 +1,12 @@
 package edu.oregonstate.choosy;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by tarrenengberg on 3/20/18.
@@ -58,7 +55,6 @@ public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdap
         public SavedDecisionViewHolder(View itemView){
             super(itemView);
             mSavedDecisionTextView = (TextView)itemView.findViewById(R.id.tv_main_inrv_saved_decision_item_text);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     DecisionUtils.decisionObject decisionText = mSavedDecisionsList.get(getAdapterPosition());

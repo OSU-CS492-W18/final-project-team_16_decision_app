@@ -14,15 +14,15 @@ import java.util.ArrayList;
 
 public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdapter.SavedDecisionViewHolder> {
 
-    private ArrayList<String> mSavedDecisionsList;
+    private ArrayList<DecisionUtils.decisionObject> mSavedDecisionsList;
     private OnSavedDecisionClickListener mSavedDecisionClickListener;
 
     SavedDecisionAdapter(OnSavedDecisionClickListener savedDecisionClickListener){
-        mSavedDecisionsList = new ArrayList<String>();
+        mSavedDecisionsList = new ArrayList<DecisionUtils.decisionObject>();
         mSavedDecisionClickListener = savedDecisionClickListener;
     }
 
-    public void updateSavedDecisionsData(ArrayList<String> decisionData){
+    public void updateSavedDecisionsData(ArrayList<DecisionUtils.decisionObject> decisionData){
         mSavedDecisionsList = decisionData;
         notifyDataSetChanged();
     }
@@ -36,7 +36,7 @@ public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdap
     }
 
     public interface OnSavedDecisionClickListener{
-        void onSavedDecisionClick(String itemText);
+        void onSavedDecisionClick(DecisionUtils.decisionObject decision);
     }
 
     @Override
@@ -57,14 +57,14 @@ public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdap
             mSavedDecisionTextView = (TextView)itemView.findViewById(R.id.tv_main_inrv_saved_decision_item_text);
             itemView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    String decisionText = mSavedDecisionsList.get(getAdapterPosition());
+                    DecisionUtils.decisionObject decisionText = mSavedDecisionsList.get(getAdapterPosition());
                     mSavedDecisionClickListener.onSavedDecisionClick(decisionText);
                 }
             });
         }
 
-        public void bind(String decision){
-            mSavedDecisionTextView.setText(decision);
+        public void bind(DecisionUtils.decisionObject decision){
+            mSavedDecisionTextView.setText(decision.getString());
         }
 
     }

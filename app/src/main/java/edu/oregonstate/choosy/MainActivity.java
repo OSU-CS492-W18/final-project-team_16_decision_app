@@ -1,6 +1,7 @@
 package edu.oregonstate.choosy;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,15 +25,11 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
     private RecyclerView mSavedDecisionsRV;
 
+    private EditText mSavedDecisionsEntryET;
+    private SQLiteDatabase mDB;
+
+
     private SavedDecisionAdapter mSavedDecisionsAdapter;
-
-
-    private static final String[] tempSavedDecisionsData = {
-            "Cars > Trucks",
-            "Pie > Cake",
-            "Camaro > Mustang",
-            "bikes > quads"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +43,42 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
         mSavedDecisionsAdapter = new SavedDecisionAdapter(this);
         mSavedDecisionsRV.setAdapter(mSavedDecisionsAdapter);
-        mSavedDecisionsAdapter.updateSavedDecisionsData(new ArrayList<String>(Arrays.asList(tempSavedDecisionsData)));
 
+        //Try to add data to database --Remove this later--
+        ChoosyDatabase db = new ChoosyDatabase(this);
+        DecisionUtils.decisionObject test1 = new DecisionUtils.decisionObject("Cake", "Pie");
+        DecisionUtils.decisionObject test2 = new DecisionUtils.decisionObject("Pizza", "Hotdogs");
+        DecisionUtils.decisionObject test3 = new DecisionUtils.decisionObject("Hiking", "Skiing");
+
+        db.addDecision(test1);
+        db.addDecision(test2);
+        db.addDecision(test3);
+
+        //Try to get added data from database
+        ArrayList<String> testVals = new ArrayList<>();
+        ArrayList<DecisionUtils.decisionObject> testDec = db.getDecisions();
+
+        //Messy way of passing strings to adapter
+        for(DecisionUtils.decisionObject dec : testDec) {
+            testVals.add(dec.getString());
+        }
+        Log.d("Main","----Decision 1: "+testDec.get(0).getString() + " --Decision 2: "+testDec.get(1).getString());
+        mSavedDecisionsAdapter.updateSavedDecisionsData(testDec);
+
+        //Try to add factor to factor database
+        DecisionUtils.factorObject factor1 = new DecisionUtils.factorObject("Tastiness","Cake", 1, 37);
+        DecisionUtils.factorObject factor2 = new DecisionUtils.factorObject("Tastiness", "Pizza", 1, 70);
+        DecisionUtils.factorObject factor3 = new DecisionUtils.factorObject("Texture", "Cake", 1, 46);
+
+        db.addFactor(factor1);
+        db.addFactor(factor2);
+        db.addFactor(factor3);
+
+        //Try to get factors
+        ArrayList<DecisionUtils.factorObject> factors = db.getFactors("Cake");
+        for(DecisionUtils.factorObject fact : factors) {
+            Log.d("Main","Factor name: "+fact.name+" Linked decision: "+fact.comp+" Pro: "+fact.pro+" Weight: "+fact.weight);
+        }
     }
 
 
@@ -72,9 +104,9 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
     }
 
     @Override
-    public void onSavedDecisionClick(String itemText) {
+    public void onSavedDecisionClick(DecisionUtils.decisionObject decision) {
         Intent detailedDecisionIntent = new Intent(this, DecisionDetailActivity.class);
-        detailedDecisionIntent.putExtra("temporary", itemText);
+        detailedDecisionIntent.putExtra(DecisionUtils.decisionObject.EXTRA_DECISION_OBJECT, decision);
         startActivity(detailedDecisionIntent);
     }
 }

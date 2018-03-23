@@ -19,6 +19,7 @@
         android:layout_margin="12dp">
 
         <EditText
+            android:id="@+id/ET_factor_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"

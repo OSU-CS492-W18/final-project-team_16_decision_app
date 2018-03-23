@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class DecisionUtils {
 
     public static class decisionObject implements Serializable {
+        public static String EXTRA_DECISION_OBJECT = "EXTRA.DECISION";
         public String firstOption;
         public String secondOption;
 
@@ -24,6 +25,7 @@ public class DecisionUtils {
     }
 
     public static class factorObject implements Serializable {
+        public static String EXTRA_FACTOR_OBJECT = "EXTRA.FACTOR";
         public String name;
         public String comp;
         public int pro;

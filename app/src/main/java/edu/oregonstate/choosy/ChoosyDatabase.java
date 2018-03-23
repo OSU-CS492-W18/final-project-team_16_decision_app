@@ -54,7 +54,7 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
         //do nothing
     }
 
-    public void addDecision(DecisionUtils.decisionObject dec) {
+    public boolean addDecision(DecisionUtils.decisionObject dec) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         //Insert
@@ -76,12 +76,15 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             values.put(ChoosyContract.Comparisons.COLUMN_SECOND, dec.secondOption);
             db.insert(ChoosyContract.Comparisons.TABLE_NAME, null, values);
             Log.d("ChoosyDatabase","Added decision "+dec.firstOption+" vs "+dec.secondOption+" to database.");
+            return true;
         }
         else
             Log.d("ChoosyDatabase","Decision already exists in database!");
+
+        return false;
     }
 
-    public void addFactor(DecisionUtils.factorObject factor) {
+    public boolean addFactor(DecisionUtils.factorObject factor) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         //Insert
@@ -105,9 +108,12 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             values.put(ChoosyContract.Factors.COLUMN_WEIGHT, factor.weight);
             db.insert(ChoosyContract.Factors.TABLE_NAME, null, values);
             Log.d("ChoosyDatabase","Added factor "+ factor.name +" of decision "+ factor.comp +" to database.");
+            return true;
         }
         else
             Log.d("ChoosyDatabase","Factor already exists for decision "+ factor.comp + " in database!");
+
+        return false;
     }
 
     public ArrayList<DecisionUtils.decisionObject> getDecisions() {
@@ -134,6 +140,46 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             vals.add(val);
 
             Log.d("ChoosyDatabase","Retrieved "+val.firstOption+" vs "+val.secondOption+" from database.");
+        }
+
+        return vals;
+    }
+
+    public ArrayList<DecisionUtils.factorObject> getFactors(String decision) {
+        //Get all factors for specified comparison name / decision
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sqlSelection = ChoosyContract.Factors.COLUMN_COMP + " = ?";
+        String[] sqlSelectionArgs = { decision };
+
+        Cursor cursor = db.query(ChoosyContract.Factors.TABLE_NAME,
+                null, sqlSelection, sqlSelectionArgs, null,
+                null, ChoosyContract.Factors.COLUMN_TIMESTAMP + " DESC");
+
+        ArrayList<DecisionUtils.factorObject> vals = new ArrayList<>();
+        DecisionUtils.factorObject val;
+        int index;
+        while (cursor.moveToNext()) {
+            String name = "";
+            String comp = "";
+            int pro = -1;
+            int weight = -1;
+
+            index = cursor.getColumnIndex(ChoosyContract.Factors.COLUMN_NAME);
+            name = cursor.getString(index);
+
+            index = cursor.getColumnIndex(ChoosyContract.Factors.COLUMN_COMP);
+            comp = cursor.getString(index);
+
+            index = cursor.getColumnIndex(ChoosyContract.Factors.COLUMN_PRO);
+            pro = cursor.getInt(index);
+
+            index = cursor.getColumnIndex(ChoosyContract.Factors.COLUMN_WEIGHT);
+            weight = cursor.getInt(index);
+
+            val = new DecisionUtils.factorObject(name, comp, pro, weight);
+            vals.add(val);
+
+            Log.d("ChoosyDatabase","Retrieved "+val.name+" factor of decision "+val.comp+" from database.");
         }
 
         return vals;

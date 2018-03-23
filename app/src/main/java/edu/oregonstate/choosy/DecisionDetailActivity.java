@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,10 +23,8 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-import java.util.Arrays;
 
-
-public class DecisionDetailActivity extends AppCompatActivity {
+public class DecisionDetailActivity extends AppCompatActivity implements FactorAdapter.OnFactorClickListener {
 
     private Spinner mProConSpinner;
     private Button mButtonAdd;
@@ -58,7 +57,7 @@ public class DecisionDetailActivity extends AppCompatActivity {
         mFactorRV = (RecyclerView)findViewById(R.id.rv_factors_list);
         mFactorRV.setLayoutManager(new LinearLayoutManager(this));
         mFactorRV.setHasFixedSize(true);
-        mFactorAdapter = new FactorAdapter();
+        mFactorAdapter = new FactorAdapter(this);
         mFactorRV.setAdapter(mFactorAdapter);
 
         mFactorTitle = (EditText)findViewById(R.id.ET_factor_title);
@@ -111,7 +110,25 @@ public class DecisionDetailActivity extends AppCompatActivity {
             }
         });
 
+        //Swiping
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
 
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                ((FactorAdapter.FactorViewHolder)viewHolder).removeFactor();
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(mFactorRV);
+    }
+
+    @Override
+    public void onFactorClick(DecisionUtils.factorObject fact) {
+        //not currently used
     }
 
     @Override

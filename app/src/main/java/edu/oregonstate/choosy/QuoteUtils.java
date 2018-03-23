@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class QuoteUtils {
     private final static String QUOTE_BASE_URL = "https://quotes.rest/qod.json";
-    private final static String QUOTE_QUERY_PARAM = "&category=";
+    private final static String QUOTE_QUERY_PARAM = "category";
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static String buildQuoteURL(String quotetype) {

@@ -26,8 +26,8 @@ public class QuoteUtils {
         try {
             JSONObject quoteObj = new JSONObject(quoteJSON);
             JSONObject quoteObj2 = quoteObj.getJSONObject("contents");
-            JSONArray quoteArray = quoteObj2.getJSONArray("quotes");
-            String quote = "shrug";
+            JSONArray quoteArray1 = quoteObj2.getJSONArray("quotes");
+            String quote = quoteArray1.getString("quote");
             return quote;
         } catch (JSONException e) {
             e.printStackTrace();

@@ -6,15 +6,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
 public class DecisionDetailActivity extends AppCompatActivity {
 
+    private Spinner mProConSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decision_detail);
+
+        mProConSpinner = (Spinner)findViewById(R.id.pro_con_spinner);
+        ArrayAdapter<CharSequence> proConAdapter = ArrayAdapter.createFromResource(this, R.array.pro_con_spinner_items, android.R.layout.simple_spinner_dropdown_item);
+        mProConSpinner.setAdapter(proConAdapter);
+
     }
 
     @Override

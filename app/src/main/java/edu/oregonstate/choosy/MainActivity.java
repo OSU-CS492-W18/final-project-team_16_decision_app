@@ -29,14 +29,6 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
     private SavedDecisionAdapter mSavedDecisionsAdapter;
 
-
-    private static final String[] tempSavedDecisionsData = {
-            "Cars > Trucks",
-            "Pie > Cake",
-            "Camaro > Mustang",
-            "bikes > quads"
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
 
         mSavedDecisionsAdapter = new SavedDecisionAdapter(this);
         mSavedDecisionsRV.setAdapter(mSavedDecisionsAdapter);
-        //mSavedDecisionsAdapter.updateSavedDecisionsData(new ArrayList<String>(Arrays.asList(tempSavedDecisionsData)));
 
         //Try to add data to database --Remove this later--
         ChoosyDatabase db = new ChoosyDatabase(this);
@@ -70,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
             testVals.add(dec.getString());
         }
         Log.d("Main","----Decision 1: "+testDec.get(0).getString() + " --Decision 2: "+testDec.get(1).getString());
-        mSavedDecisionsAdapter.updateSavedDecisionsData(testVals);
+        mSavedDecisionsAdapter.updateSavedDecisionsData(testDec);
 
         //Try to add factor to factor database
         DecisionUtils.factorObject factor1 = new DecisionUtils.factorObject("Tastiness","Cake", 1, 50);
@@ -112,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
     }
 
     @Override
-    public void onSavedDecisionClick(String itemText) {
+    public void onSavedDecisionClick(DecisionUtils.decisionObject decision) {
         Intent detailedDecisionIntent = new Intent(this, DecisionDetailActivity.class);
-        detailedDecisionIntent.putExtra("temporary", itemText);
+        detailedDecisionIntent.putExtra("temporary", decision);
         startActivity(detailedDecisionIntent);
     }
 }

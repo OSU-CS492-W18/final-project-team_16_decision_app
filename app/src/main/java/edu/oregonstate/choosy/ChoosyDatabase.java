@@ -54,7 +54,7 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
         //do nothing
     }
 
-    public void addDecision(DecisionUtils.decisionObject dec) {
+    public boolean addDecision(DecisionUtils.decisionObject dec) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         //Insert
@@ -76,12 +76,15 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             values.put(ChoosyContract.Comparisons.COLUMN_SECOND, dec.secondOption);
             db.insert(ChoosyContract.Comparisons.TABLE_NAME, null, values);
             Log.d("ChoosyDatabase","Added decision "+dec.firstOption+" vs "+dec.secondOption+" to database.");
+            return true;
         }
         else
             Log.d("ChoosyDatabase","Decision already exists in database!");
+
+        return false;
     }
 
-    public void addFactor(DecisionUtils.factorObject factor) {
+    public boolean addFactor(DecisionUtils.factorObject factor) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         //Insert
@@ -105,9 +108,12 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             values.put(ChoosyContract.Factors.COLUMN_WEIGHT, factor.weight);
             db.insert(ChoosyContract.Factors.TABLE_NAME, null, values);
             Log.d("ChoosyDatabase","Added factor "+ factor.name +" of decision "+ factor.comp +" to database.");
+            return true;
         }
         else
             Log.d("ChoosyDatabase","Factor already exists for decision "+ factor.comp + " in database!");
+
+        return false;
     }
 
     public ArrayList<DecisionUtils.decisionObject> getDecisions() {

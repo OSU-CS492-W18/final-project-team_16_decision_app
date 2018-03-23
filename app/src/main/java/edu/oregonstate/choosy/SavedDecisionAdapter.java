@@ -71,6 +71,19 @@ public class SavedDecisionAdapter extends RecyclerView.Adapter<SavedDecisionAdap
             mSavedDecisionTextView.setText(decision.getString());
         }
 
+        public void removeDecision() {
+            int pos = getAdapterPosition();
+            DecisionUtils.decisionObject dec = mSavedDecisionsList.get(pos);
+            String name = dec.firstOption;
+
+            ChoosyDatabase db = new ChoosyDatabase(itemView.getContext());
+            db.deleteDecision(name);
+
+            //Remove from arraylist and notify update
+            mSavedDecisionsList.remove(pos);
+            notifyDataSetChanged();
+        }
+
     }
 
 }

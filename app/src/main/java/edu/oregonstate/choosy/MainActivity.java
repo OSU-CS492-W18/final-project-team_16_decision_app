@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -42,41 +43,28 @@ public class MainActivity extends AppCompatActivity implements SavedDecisionAdap
         mSavedDecisionsAdapter = new SavedDecisionAdapter(this);
         mSavedDecisionsRV.setAdapter(mSavedDecisionsAdapter);
 
-        //Try to add data to database --Remove this later--
         ChoosyDatabase db = new ChoosyDatabase(this);
-        DecisionUtils.decisionObject test1 = new DecisionUtils.decisionObject("Cake", "Pie");
-        DecisionUtils.decisionObject test2 = new DecisionUtils.decisionObject("Pizza", "Hotdogs");
-        DecisionUtils.decisionObject test3 = new DecisionUtils.decisionObject("Hiking", "Skiing");
-
-        db.addDecision(test1);
-        db.addDecision(test2);
-        db.addDecision(test3);
 
         //Try to get added data from database
-        ArrayList<String> testVals = new ArrayList<>();
         ArrayList<DecisionUtils.decisionObject> testDec = db.getDecisions();
-
-        //Messy way of passing strings to adapter
-        for(DecisionUtils.decisionObject dec : testDec) {
-            testVals.add(dec.getString());
-        }
-        Log.d("Main","----Decision 1: "+testDec.get(0).getString() + " --Decision 2: "+testDec.get(1).getString());
         mSavedDecisionsAdapter.updateSavedDecisionsData(testDec);
 
-        //Try to add factor to factor database
-        DecisionUtils.factorObject factor1 = new DecisionUtils.factorObject("Tastiness","Cake", 1, 37);
-        DecisionUtils.factorObject factor2 = new DecisionUtils.factorObject("Tastiness", "Pizza", 1, 70);
-        DecisionUtils.factorObject factor3 = new DecisionUtils.factorObject("Texture", "Cake", 1, 46);
+        //Swiping
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
 
-        db.addFactor(factor1);
-        db.addFactor(factor2);
-        db.addFactor(factor3);
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                ((SavedDecisionAdapter.SavedDecisionViewHolder)viewHolder).removeDecision();
+            }
+        };
 
-        //Try to get factors
-        ArrayList<DecisionUtils.factorObject> factors = db.getFactors("Cake");
-        for(DecisionUtils.factorObject fact : factors) {
-            Log.d("Main","Factor name: "+fact.name+" Linked decision: "+fact.comp+" Pro: "+fact.pro+" Weight: "+fact.weight);
-        }
+        //Attach to recyclerview  Modified class lecture code
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(mSavedDecisionsRV);
     }
 
 

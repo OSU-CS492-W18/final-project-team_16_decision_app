@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/button_see_result"
-        android:icon="@drawable/main_act_add_new_decision"
+        android:icon="@drawable/ic_finish"
         android:title="@string/see_result_btn_title"
         app:showAsAction="ifRoom"/>
 

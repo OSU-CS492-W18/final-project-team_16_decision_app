@@ -35,13 +35,6 @@ public class DecisionDetailActivity extends AppCompatActivity implements FactorA
     private FactorAdapter mFactorAdapter;
     private ArrayList<DecisionUtils.factorObject> factors;
 
-    private static final String[] tempFactorData = {
-            "Tastiness",
-            "Cooking Time",
-            "Factor 3",
-            "Factor 4"
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +87,7 @@ public class DecisionDetailActivity extends AppCompatActivity implements FactorA
                     else
                         pro = 0;
 
-                    Log.d("DecisionDetailActivity","Pro: "+pro+" Weight: "+weight);
+                    //Log.d("DecisionDetailActivity","Pro: "+pro+" Weight: "+weight);
                     DecisionUtils.factorObject newFactor = new DecisionUtils.factorObject(title, decision.firstOption, pro, weight);
 
                     //Add new factor to db

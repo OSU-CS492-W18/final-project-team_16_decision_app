@@ -75,11 +75,12 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             values.put(ChoosyContract.Comparisons.COLUMN_FIRST, dec.firstOption);
             values.put(ChoosyContract.Comparisons.COLUMN_SECOND, dec.secondOption);
             db.insert(ChoosyContract.Comparisons.TABLE_NAME, null, values);
-            Log.d("ChoosyDatabase","Added decision "+dec.firstOption+" vs "+dec.secondOption+" to database.");
+            //Log.d("ChoosyDatabase","Added decision "+dec.firstOption+" vs "+dec.secondOption+" to database.");
             return true;
         }
-        else
-            Log.d("ChoosyDatabase","Decision already exists in database!");
+        else {
+            //Log.d("ChoosyDatabase","Decision already exists in database!");
+        }
 
         return false;
     }
@@ -107,11 +108,12 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             values.put(ChoosyContract.Factors.COLUMN_PRO, factor.pro);
             values.put(ChoosyContract.Factors.COLUMN_WEIGHT, factor.weight);
             db.insert(ChoosyContract.Factors.TABLE_NAME, null, values);
-            Log.d("ChoosyDatabase","Added factor "+ factor.name +" of decision "+ factor.comp +" to database.");
+            //Log.d("ChoosyDatabase","Added factor "+ factor.name +" of decision "+ factor.comp +" to database.");
             return true;
         }
-        else
-            Log.d("ChoosyDatabase","Factor already exists for decision "+ factor.comp + " in database!");
+        else {
+            //Log.d("ChoosyDatabase","Factor already exists for decision "+ factor.comp + " in database!");
+        }
 
         return false;
     }
@@ -139,7 +141,7 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             val = new DecisionUtils.decisionObject(first, second);
             vals.add(val);
 
-            Log.d("ChoosyDatabase","Retrieved "+val.firstOption+" vs "+val.secondOption+" from database.");
+            //Log.d("ChoosyDatabase","Retrieved "+val.firstOption+" vs "+val.secondOption+" from database.");
         }
 
         return vals;
@@ -179,7 +181,7 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
             val = new DecisionUtils.factorObject(name, comp, pro, weight);
             vals.add(val);
 
-            Log.d("ChoosyDatabase","Retrieved "+val.name+" factor of decision "+val.comp+" from database.");
+            //Log.d("ChoosyDatabase","Retrieved "+val.name+" factor of decision "+val.comp+" from database.");
         }
 
         return vals;
@@ -199,7 +201,7 @@ public class ChoosyDatabase extends SQLiteOpenHelper {
     public void deleteFactor(String name, String decName) {
         SQLiteDatabase db = this.getWritableDatabase();
         String where = ChoosyContract.Factors.COLUMN_COMP + " = ? AND " + ChoosyContract.Factors.COLUMN_NAME + " = ?";
-        String[] SQLwhereArgs = { name, decName };
+        String[] SQLwhereArgs = { decName, name };
         db.delete(ChoosyContract.Factors.TABLE_NAME, where, SQLwhereArgs);
     }
 }

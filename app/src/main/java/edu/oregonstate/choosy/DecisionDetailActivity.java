@@ -3,8 +3,13 @@ package edu.oregonstate.choosy;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,12 +21,25 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+import java.util.Arrays;
+
+
 public class DecisionDetailActivity extends AppCompatActivity {
 
     private Spinner mProConSpinner;
     private Button mButtonAdd;
     private EditText mFactorTitle;
     private SeekBar mSeekBar;
+
+    private RecyclerView mFactorRV;
+    private FactorAdapter mFactorAdapter;
+
+    private static final String[] tempFactorData = {
+            "Tastiness",
+            "Cooking Time",
+            "Factor 3",
+            "Factor 4"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +49,14 @@ public class DecisionDetailActivity extends AppCompatActivity {
         mProConSpinner = (Spinner)findViewById(R.id.pro_con_spinner);
         ArrayAdapter<CharSequence> proConAdapter = ArrayAdapter.createFromResource(this, R.array.pro_con_spinner_items, android.R.layout.simple_spinner_dropdown_item);
         mProConSpinner.setAdapter(proConAdapter);
+
+
+        mFactorRV = (RecyclerView)findViewById(R.id.rv_factors_list);
+        mFactorRV.setLayoutManager(new LinearLayoutManager(this));
+        mFactorRV.setHasFixedSize(true);
+        mFactorAdapter = new FactorAdapter();
+        mFactorRV.setAdapter(mFactorAdapter);
+        mFactorAdapter.updateFactorData(new ArrayList<String>(Arrays.asList(tempFactorData)));
 
         mFactorTitle = (EditText)findViewById(R.id.ET_factor_title);
         mSeekBar = (SeekBar)findViewById(R.id.simpleSeekBar);
@@ -70,6 +96,7 @@ public class DecisionDetailActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     @Override
@@ -103,6 +130,5 @@ public class DecisionDetailActivity extends AppCompatActivity {
 
         startActivity(seeResultIntent);
     }
-
 
 }

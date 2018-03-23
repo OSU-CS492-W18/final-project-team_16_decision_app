@@ -55,12 +55,11 @@
         android:layout_width="fill_parent"
         android:background="@android:color/holo_blue_bright">
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_factors_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textSize="22sp"
-            android:text="There"/>
+            android:background="#FF8800"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

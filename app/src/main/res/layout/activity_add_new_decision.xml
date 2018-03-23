@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
     tools:context="edu.oregonstate.choosy.AddNewDecisionActivity"
     android:background="@color/colorPrimaryDark">
 
@@ -12,24 +13,52 @@
         android:id="@+id/ET_new_option_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_customizations"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:textColor="#ffffff"
+        android:gravity="center_horizontal"
         android:hint="@string/new_option_1_hint"/>
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:layout_marginTop="12dp"
+        android:text="VS."/>
 
     <EditText
         android:id="@+id/ET_new_option_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_customizations"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:textColor="#ffffff"
+        android:gravity="center_horizontal"
         android:hint="@string/new_option_2_hint"/>
 
     <Button
         android:id="@+id/button_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/choosy_buttons"
+        android:textColor="#ffffff"
+        android:layout_margin="12dp"
         android:text="Add Decision"/>
 
     <TextView
         android:id="@+id/TV_quote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="italic"
+        android:textColor="@color/colorHint"
+        android:textAlignment="center"
         android:text="This temporary text shows where the inspirational quote will go."/>
 
 </LinearLayout>
